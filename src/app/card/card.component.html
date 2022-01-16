@@ -18,13 +18,14 @@
       </mat-drawer>
 
       <div class="example-sidenav-content w-100-div flex-container">
-        <mat-card *ngFor="let card of cardList" class="example-card w-50-div">
-          <mat-card-title>{{card.name}}</mat-card-title>
+        <mat-card *ngFor="let card of cardList; let i = index" class="example-card w-50-div">
+          <mat-card-title>{{card.name}}<mat-icon (click)="editCard(card,i)" id="edit-icon">edit</mat-icon></mat-card-title>
           <img mat-card-image [src]="card.image" alt="Jira Ticket">
           <mat-card-content>
-            Jira is a proprietary issue tracking product developed by ATLASSIAN that allows bug tracking and agile
-            project management.
-            <br><br>
+            <!-- Jira is a proprietary issue tracking product developed by ATLASSIAN that allows bug tracking and agile
+            project management. -->
+            <!-- <br><br> -->
+            <br>
             <a id="link" [href]="card.url" target="_blank">{{card.url}}</a>
           </mat-card-content>
         </mat-card>

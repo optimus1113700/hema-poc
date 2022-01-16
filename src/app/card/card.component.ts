@@ -2,6 +2,7 @@ import { ModalWidgetComponent } from './../modal-widget/modal-widget.component';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -36,6 +37,7 @@ export class CardComponent implements OnInit {
     }
   ]
 
+
   ngOnInit(): void {
   }
 
@@ -45,6 +47,30 @@ export class CardComponent implements OnInit {
       disableClose: true,
       data: {},
     });
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        this.cardList.push(data);
+        console.log(this.cardList);
+      }
+    );
+  }
+
+  editCard(card,i) {
+    const dialogRef = this.dialog.open(ModalWidgetComponent, {
+      width: '25%',
+      disableClose: true,
+      data: {
+        cardData : card
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        this.cardList[i].url = data.url;
+        this.cardList[i].name = data.name;
+      }
+    );
   }
 }
 

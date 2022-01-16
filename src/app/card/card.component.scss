@@ -36,3 +36,18 @@
 #link {
   word-wrap: break-word;
 }
+
+#edit-icon{
+  float: right;
+  cursor: pointer;
+}
+
+.mat-card-image {
+  width: 100% !important;
+  margin: 0px !important;
+}
+
+.mat-card{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f1f1f1;
+}
