@@ -1,6 +1,7 @@
 import { ModalWidgetComponent } from './../modal-widget/modal-widget.component';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -12,27 +13,31 @@ export class CardComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
+  timePeriods = [
+    'Bronze age',
+    'Iron age',
+    'Middle ages',
+    'Early modern period',
+    'Long nineteenth century',
+  ];
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.timePeriods, event.previousIndex, event.currentIndex);
+  }
+
   cardList = [
     {
       url: "https://material.angular.io/components/card/examples",
-      name: "Jira 1",
+      name: "Jira ",
       image: "../../assets/images/Jira.png"
     },
     {
       url: "https://material.angular.io/components/card/examples",
-      name: "Jira 2",
+      name: "Jira ",
       image: "../../assets/images/Jira.png"
     }, {
       url: "https://material.angular.io/components/card/examples",
-      name: "Jira 3",
-      image: "../../assets/images/Jira.png"
-    }, {
-      url: "https://material.angular.io/components/card/examples",
-      name: "Jira 4",
-      image: "../../assets/images/Jira.png"
-    }, {
-      url: "https://material.angular.io/components/card/examples",
-      name: "Jira 5",
+      name: "Jira ",
       image: "../../assets/images/Jira.png"
     }
   ]
