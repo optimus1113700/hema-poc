@@ -13,18 +13,6 @@ export class CardComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
-  timePeriods = [
-    'Bronze age',
-    'Iron age',
-    'Middle ages',
-    'Early modern period',
-    'Long nineteenth century',
-  ];
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.timePeriods, event.previousIndex, event.currentIndex);
-  }
-
   cardList = [
     {
       url: "https://material.angular.io/components/card/examples",
@@ -77,5 +65,7 @@ export class CardComponent implements OnInit {
       }
     );
   }
+
+  
 }
 

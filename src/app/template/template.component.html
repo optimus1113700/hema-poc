@@ -1,0 +1,80 @@
+<mat-toolbar style="background: #584558;">
+  <span style="color: antiquewhite;margin-left: 10px;">Morgan Stanley</span>
+</mat-toolbar>
+
+<div id="button-container">
+  <span>
+    <button mat-flat-button style="margin-right: 25px;" color="primary">Add</button>
+  </span>
+  <span>
+    <button mat-flat-button color="primary" (click)="save()">Save</button>
+  </span>
+  <span>
+    <button mat-flat-button style="float: right;background-color:rgb(0 0 0 / 14%);color: black;" (click)="resetForm()">Reset</button>
+  </span>
+</div>
+
+<form [formGroup]="templateForm">
+
+  <div style="margin-left: 25px;margin-top: 25px;">
+
+    <table style="width: 100%;">
+      <tr>
+        <td style="width: 10%;">
+          <mat-label>Tile Name</mat-label>
+        </td>
+        <td style="width: 40%;">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="tileName">
+              <mat-option value="jira">Jira</mat-option>
+              <mat-option value="gmail">Gmail</mat-option>
+              <mat-option value="stash">Stash</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td style="width: 10%;">
+          <mat-label>Link</mat-label>
+        </td>
+        <td style="width: 40%;">
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="link">
+          </mat-form-field>
+          <mat-icon style="font-size: 32px;margin-left: 12px;" (click)="clearLink()">delete_outline</mat-icon>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 10%;">
+          <mat-label>Rows</mat-label>
+        </td>
+        <td style="width: 40%;">
+          <mat-slider aria-label="unit(s)" formControlName="rows"></mat-slider>
+        </td>
+        <td style="width: 12%;">
+          <mat-label>Background Image</mat-label>
+        </td>
+        <td style="width: 40%;">
+          <button class="file-upload-button">
+            <input type="file" #fileInput formControlName="image" />
+            Upload
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 10%;">
+          <mat-label>Columns</mat-label>
+        </td>
+        <td style="width: 40%;">
+          <mat-slider aria-label="unit(s)" formControlName="columns"></mat-slider>
+        </td>
+        <td style="width: 10%;">
+          <mat-label>Details</mat-label>
+        </td>
+        <td style="width: 40%;">
+          <mat-form-field appearance="fill">
+            <input matInput formControlName="details">
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </div>
+</form>

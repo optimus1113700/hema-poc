@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VegaMaterialModule } from './core/material.module';
 import { HeaderComponent } from './header/header.component';
 import { ModalWidgetComponent } from './modal-widget/modal-widget.component';
+import { TemplateComponent } from './template/template.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ModalWidgetComponent } from './modal-widget/modal-widget.component';
     CardComponent,
     HeaderComponent,
     ModalWidgetComponent,
+    TemplateComponent,
   ],
   imports: [
     BrowserModule,
