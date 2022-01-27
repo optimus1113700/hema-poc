@@ -134,4 +134,4 @@ import { MatTreeModule } from '@angular/material/tree';
     ScrollingModule,
   ]
 })
-export class VegaMaterialModule { }
+export class MaterialModule { }
