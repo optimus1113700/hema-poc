@@ -3,14 +3,15 @@
 </mat-toolbar>
 
 <div id="button-container">
-  <span>
+  <!-- <span>
     <button mat-flat-button style="margin-right: 25px;" color="primary">Add</button>
+  </span> -->
+  <span>
+    <button mat-flat-button style="margin-right:25px;" color="primary" (click)="save()">Save</button>
   </span>
   <span>
-    <button mat-flat-button color="primary" (click)="save()">Save</button>
-  </span>
-  <span>
-    <button mat-flat-button style="float: right;background-color:rgb(0 0 0 / 14%);color: black;" (click)="resetForm()">Reset</button>
+    <button mat-flat-button style="background-color:rgb(0 0 0 / 14%);color: black;"
+      (click)="resetForm()">Reset</button>
   </span>
 </div>
 
@@ -26,9 +27,9 @@
         <td style="width: 40%;">
           <mat-form-field appearance="fill">
             <mat-select formControlName="tileName">
-              <mat-option value="jira">Jira</mat-option>
-              <mat-option value="gmail">Gmail</mat-option>
-              <mat-option value="stash">Stash</mat-option>
+              <mat-option *ngFor="let tile of tiles" [value]="tile.tileName">
+                {{tile.tileName}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </td>
@@ -47,7 +48,7 @@
           <mat-label>Rows</mat-label>
         </td>
         <td style="width: 40%;">
-          <mat-slider aria-label="unit(s)" formControlName="rows"></mat-slider>
+          <mat-slider step="1" min="1" max="4" aria-label="unit(s)" formControlName="rows"></mat-slider>
         </td>
         <td style="width: 12%;">
           <mat-label>Background Image</mat-label>
@@ -64,7 +65,7 @@
           <mat-label>Columns</mat-label>
         </td>
         <td style="width: 40%;">
-          <mat-slider aria-label="unit(s)" formControlName="columns"></mat-slider>
+          <mat-slider step="1" min="1" max="4" aria-label="unit(s)" formControlName="columns"></mat-slider>
         </td>
         <td style="width: 10%;">
           <mat-label>Details</mat-label>
@@ -78,3 +79,10 @@
     </table>
   </div>
 </form>
+
+
+<mat-grid-list cols="4" rowHeight="100px">
+  <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows">
+    {{tile.tileName}}
+  </mat-grid-tile>
+</mat-grid-list>
