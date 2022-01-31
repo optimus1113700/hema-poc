@@ -3,15 +3,14 @@
 </mat-toolbar>
 
 <div id="button-container">
-  <!-- <span>
-    <button mat-flat-button style="margin-right: 25px;" color="primary">Add</button>
-  </span> -->
   <span>
-    <button mat-flat-button style="margin-right:25px;" color="primary" (click)="save()">Save</button>
+    <button *ngIf="!editFlag" mat-flat-button style="margin-right: 25px;" color="primary" (click)="add()">Add</button>
   </span>
   <span>
-    <button mat-flat-button style="background-color:rgb(0 0 0 / 14%);color: black;"
-      (click)="resetForm()">Reset</button>
+    <button *ngIf="editFlag" mat-flat-button style="margin-right:25px;" color="primary" (click)="save()">Save</button>
+  </span>
+  <span>
+    <button mat-flat-button style="background-color:rgb(0 0 0 / 14%);color: black;" (click)="resetForm()">Reset</button>
   </span>
 </div>
 
@@ -26,11 +25,7 @@
         </td>
         <td style="width: 40%;">
           <mat-form-field appearance="fill">
-            <mat-select formControlName="tileName">
-              <mat-option *ngFor="let tile of tiles" [value]="tile.tileName">
-                {{tile.tileName}}
-              </mat-option>
-            </mat-select>
+            <input matInput formControlName="tileName">
           </mat-form-field>
         </td>
         <td style="width: 10%;">
@@ -48,7 +43,7 @@
           <mat-label>Rows</mat-label>
         </td>
         <td style="width: 40%;">
-          <mat-slider step="1" min="1" max="4" aria-label="unit(s)" formControlName="rows"></mat-slider>
+          <mat-slider step="1" min="0" max="4" aria-label="unit(s)" formControlName="rows"></mat-slider>
         </td>
         <td style="width: 12%;">
           <mat-label>Background Image</mat-label>
@@ -65,7 +60,7 @@
           <mat-label>Columns</mat-label>
         </td>
         <td style="width: 40%;">
-          <mat-slider step="1" min="1" max="4" aria-label="unit(s)" formControlName="columns"></mat-slider>
+          <mat-slider step="1" min="0" max="4" aria-label="unit(s)" formControlName="columns"></mat-slider>
         </td>
         <td style="width: 10%;">
           <mat-label>Details</mat-label>
@@ -82,7 +77,8 @@
 
 
 <mat-grid-list cols="4" rowHeight="100px">
-  <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows">
+  <mat-grid-tile class="tile-cursor" (dblclick)="doubleClickFunction(tile,i)" *ngFor="let tile of tiles;let i = index"
+    [colspan]="tile.cols" [rowspan]="tile.rows">
     {{tile.tileName}}
   </mat-grid-tile>
 </mat-grid-list>

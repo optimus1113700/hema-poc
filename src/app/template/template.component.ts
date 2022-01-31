@@ -32,7 +32,7 @@ export class TemplateComponent implements OnInit {
     details: new FormControl()
   });
 
-
+  editFlag: boolean = false;
 
   tiles: Tile[] = [
     { tileName: 'Jira', link: 'https://jira.com', rows: 1, image: '', cols: 3, details: 'Jira' },
@@ -46,7 +46,7 @@ export class TemplateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  save() {
+  add() {
     console.log(this.templateForm.value);
     const obj = {
       tileName: this.templateForm.get('tileName').value,
@@ -60,10 +60,24 @@ export class TemplateComponent implements OnInit {
 
   resetForm() {
     this.templateForm.reset();
+    this.editFlag = !this.editFlag;
+  }
+
+  save(){
+
   }
 
   clearLink() {
     this.templateForm.controls['link'].reset()
+  }
+
+  doubleClickFunction(tile,i) {
+    this.editFlag = !this.editFlag;
+    this.templateForm.controls['tileName'].setValue(tile.tileName);
+    this.templateForm.controls['link'].setValue(tile.link);
+    this.templateForm.controls['rows'].setValue(tile.rows);
+    this.templateForm.controls['columns'].setValue(tile.cols);
+    this.templateForm.controls['details'].setValue(tile.details);
   }
 
 }
