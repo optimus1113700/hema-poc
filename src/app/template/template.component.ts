@@ -1,5 +1,5 @@
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 export interface Tile {
@@ -36,6 +36,14 @@ export class TemplateComponent implements OnInit {
 
   tileIndex: number;
 
+  @ViewChild('fileInput') el: ElementRef;
+
+  imageUrl: any = '';
+
+  editFile: boolean = true;
+
+  removeUpload: boolean = false;
+
   tiles: Tile[] = [
     { tileName: 'Jira', link: 'https://jira.com', rows: 1, image: '', cols: 3, details: 'Jira' },
     { tileName: 'Gmail', link: 'https://gmail.com', rows: 2, image: '', cols: 1, details: 'Jira' },
@@ -43,7 +51,9 @@ export class TemplateComponent implements OnInit {
     { tileName: 'Stash', link: 'https://stash.com', rows: 1, image: '', cols: 2, details: 'Jira' }
   ]
 
-  constructor() { }
+  constructor(
+    private cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
   }
@@ -53,6 +63,7 @@ export class TemplateComponent implements OnInit {
     const obj = {
       tileName: this.templateForm.get('tileName').value,
       link: this.templateForm.get('link').value,
+      image: this.templateForm.get('image').value,
       rows: this.templateForm.get('rows').value,
       cols: this.templateForm.get('columns').value,
       details: this.templateForm.get('details').value
@@ -63,6 +74,8 @@ export class TemplateComponent implements OnInit {
   resetForm() {
     this.templateForm.reset();
     this.editFlag = !this.editFlag;
+    this.fileName = '';
+
   }
 
   save() {
@@ -81,7 +94,7 @@ export class TemplateComponent implements OnInit {
   }
 
   clearLink() {
-    this.templateForm.controls['link'].reset()
+    this.templateForm.controls['link'].reset();
   }
 
   doubleClickFunction(tile, i) {
@@ -94,4 +107,36 @@ export class TemplateComponent implements OnInit {
     this.tileIndex = i;
   }
 
+  fileName: any = '';
+
+  uploadFile(event) {
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    this.fileName = `${file.name}`;
+
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+        this.templateForm.patchValue({
+          file: reader.result
+        });
+        this.editFile = false;
+        this.removeUpload = true;
+      }
+      // ChangeDetectorRef since file is loading outside the zone
+      this.cd.markForCheck();
+    }
+  }
+
+  removeUploadedFile() {
+    let newFileList = Array.from(this.el.nativeElement.files);
+    this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+    this.editFile = true;
+    this.removeUpload = false;
+    this.templateForm.patchValue({
+      file: [null]
+    });
+  }
 }

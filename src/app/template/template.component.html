@@ -35,7 +35,7 @@
           <mat-form-field appearance="fill">
             <input matInput formControlName="link">
           </mat-form-field>
-          <mat-icon style="font-size: 32px;margin-left: 12px;" (click)="clearLink()">delete_outline</mat-icon>
+          <mat-icon class="icon" (click)="clearLink()">delete_outline</mat-icon>
         </td>
       </tr>
       <tr>
@@ -49,9 +49,11 @@
           <mat-label>Background Image</mat-label>
         </td>
         <td style="width: 40%;">
+          <mat-form-field appearance="fill">
+            <input matInput [value]="fileName" disabled>
+          </mat-form-field>
           <button class="file-upload-button">
-            <input type="file" #fileInput formControlName="image" />
-            Upload
+            <input type="file" #fileInput (change)="uploadFile($event)" formControlName="image" />
           </button>
         </td>
       </tr>
@@ -76,7 +78,7 @@
 </form>
 
 
-<mat-grid-list cols="4" rowHeight="100px">
+<mat-grid-list class="grid-style" cols="4" rowHeight="100px">
   <mat-grid-tile class="tile-cursor" (dblclick)="doubleClickFunction(tile,i)" *ngFor="let tile of tiles;let i = index"
     [colspan]="tile.cols" [rowspan]="tile.rows">
     {{tile.tileName}}
