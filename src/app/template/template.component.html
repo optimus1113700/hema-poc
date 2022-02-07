@@ -50,7 +50,7 @@
         </td>
         <td style="width: 40%;">
           <mat-form-field appearance="fill">
-            <input matInput [value]="fileName" disabled>
+            <input matInput [value]="fileName" placeholder="Enter Url or Browse">
           </mat-form-field>
           <button class="file-upload-button">
             <input type="file" #fileInput (change)="uploadFile($event)" formControlName="image" />
