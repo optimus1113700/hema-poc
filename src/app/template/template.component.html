@@ -50,10 +50,10 @@
         </td>
         <td style="width: 40%;">
           <mat-form-field appearance="fill">
-            <input matInput [value]="fileName" placeholder="Enter Url or Browse">
+            <input matInput [value]="fileName" formControlName="image" placeholder="Enter Url or Browse">
           </mat-form-field>
           <button class="file-upload-button">
-            <input type="file" #fileInput (change)="uploadFile($event)" formControlName="image" />
+            <input type="file" #fileInput (change)="uploadFile($event)" />
           </button>
         </td>
       </tr>
@@ -81,6 +81,7 @@
 <mat-grid-list class="grid-style" cols="4" rowHeight="100px">
   <mat-grid-tile class="tile-cursor" (dblclick)="doubleClickFunction(tile,i)" *ngFor="let tile of tiles;let i = index"
     [colspan]="tile.cols" [rowspan]="tile.rows">
-    {{tile.tileName}}
+    <div style="padding :10px;">{{tile.details}}</div>
+    <img style="height: 75px;width: 200px; padding: 10px;" [src]="tile.image" class="image">
   </mat-grid-tile>
 </mat-grid-list>

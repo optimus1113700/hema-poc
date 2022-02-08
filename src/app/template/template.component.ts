@@ -45,10 +45,10 @@ export class TemplateComponent implements OnInit {
   removeUpload: boolean = false;
 
   tiles: Tile[] = [
-    { tileName: 'Jira', link: 'https://jira.com', rows: 1, image: '', cols: 3, details: 'Jira' },
-    { tileName: 'Gmail', link: 'https://gmail.com', rows: 2, image: '', cols: 1, details: 'Jira' },
-    { tileName: 'Stash', link: 'https://stash.com', rows: 1, image: '', cols: 1, details: 'Jira' },
-    { tileName: 'Stash', link: 'https://stash.com', rows: 1, image: '', cols: 2, details: 'Jira' }
+    { tileName: 'Jira', link: 'https://jira.com', rows: 1, image: 'assets/images/Jira.png', cols: 3, details: 'Jira Software is part of a family of products designed to help teams of all types manage work. Originally, Jira was designed as a bug and issue tracker.' },
+    { tileName: 'Git', link: 'https://gmail.com', rows: 2, image: 'https://blogcdn.gmass.co/blog/wp-content/uploads/2020/04/Featured-image-hosted-vs-embedded-images-104kb.png', cols: 1, details: 'Git is a free and open source distributed version control system .' },
+    { tileName: 'Gmail', link: 'https://stash.com', rows: 1, image: 'https://cdn-media-1.freecodecamp.org/images/VQhi-KgyeBh6jegrDc2zaLOGxsBWq0Bw5dNq', cols: 1, details: 'Gmail is a free email service provided by Google' },
+    { tileName: 'Jira', link: 'https://jira.com', rows: 1, image: 'assets/images/Jira.png', cols: 2, details: 'Jira Software is part of a family of products designed to help teams of all types manage work. Originally, Jira was designed as a bug and issue tracker.' },
   ]
 
   constructor(
@@ -69,12 +69,13 @@ export class TemplateComponent implements OnInit {
       details: this.templateForm.get('details').value
     };
     this.tiles.push(obj);
+    this.templateForm.reset();
+    this.fileName = '';
   }
 
   resetForm() {
     this.templateForm.reset();
     this.editFlag = !this.editFlag;
-    this.fileName = '';
 
   }
 
@@ -83,6 +84,7 @@ export class TemplateComponent implements OnInit {
     const editObj = {
       tileName: this.templateForm.get('tileName').value,
       link: this.templateForm.get('link').value,
+      image: this.templateForm.get('image').value,
       rows: this.templateForm.get('rows').value,
       cols: this.templateForm.get('columns').value,
       details: this.templateForm.get('details').value
@@ -101,6 +103,7 @@ export class TemplateComponent implements OnInit {
     this.editFlag = !this.editFlag;
     this.templateForm.controls['tileName'].setValue(tile.tileName);
     this.templateForm.controls['link'].setValue(tile.link);
+    this.templateForm.controls['image'].setValue(tile.image);
     this.templateForm.controls['rows'].setValue(tile.rows);
     this.templateForm.controls['columns'].setValue(tile.cols);
     this.templateForm.controls['details'].setValue(tile.details);
