@@ -1,7 +1,7 @@
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TemplateComponent } from '../template/template.component';
 
 export interface Tile {
   tileName?: string;
@@ -14,15 +14,12 @@ export interface Tile {
   text?: string
 }
 
-
 @Component({
-  selector: 'app-template',
-  templateUrl: './template.component.html',
-  styleUrls: ['./template.component.scss']
+  selector: 'app-template-form',
+  templateUrl: './template-form.component.html',
+  styleUrls: ['./template-form.component.scss']
 })
-
-
-export class TemplateComponent implements OnInit {
+export class TemplateFormComponent implements OnInit {
 
   templateForm = new FormGroup({
     tileName: new FormControl(),
@@ -45,16 +42,9 @@ export class TemplateComponent implements OnInit {
 
   removeUpload: boolean = false;
 
-  tiles: Tile[] = [
-    { tileName: 'Jira', link: 'https://jira.com', rows: 1, image: 'assets/images/Jira.png', cols: 3, details: 'Jira Software is part of a family of products designed to help teams of all types manage work. Originally, Jira was designed as a bug and issue tracker.' },
-    { tileName: 'Git', link: 'https://gmail.com', rows: 2, image: 'https://blogcdn.gmass.co/blog/wp-content/uploads/2020/04/Featured-image-hosted-vs-embedded-images-104kb.png', cols: 1, details: 'Git is a free and open source distributed version control system .' },
-    { tileName: 'Gmail', link: 'https://stash.com', rows: 1, image: 'https://cdn-media-1.freecodecamp.org/images/VQhi-KgyeBh6jegrDc2zaLOGxsBWq0Bw5dNq', cols: 1, details: 'Gmail is a free email service provided by Google' },
-    { tileName: 'Jira', link: 'https://jira.com', rows: 1, image: 'assets/images/Jira.png', cols: 2, details: 'Jira Software is part of a family of products designed to help teams of all types manage work. Originally, Jira was designed as a bug and issue tracker.' },
-  ]
-
   constructor(
     private cd: ChangeDetectorRef,
-    public dialogRef: MatDialogRef<TemplateComponent>,
+    public dialogRef: MatDialogRef<TemplateFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
   ) { }
 
@@ -71,7 +61,6 @@ export class TemplateComponent implements OnInit {
       cols: this.templateForm.get('columns').value,
       details: this.templateForm.get('details').value
     };
-    this.tiles.push(obj);
     this.templateForm.reset();
     this.fileName = '';
   }
@@ -92,7 +81,6 @@ export class TemplateComponent implements OnInit {
       cols: this.templateForm.get('columns').value,
       details: this.templateForm.get('details').value
     };
-    this.tiles[this.tileIndex] = editObj;
     this.templateForm.reset();
     this.editFlag = !this.editFlag;
 
@@ -145,4 +133,9 @@ export class TemplateComponent implements OnInit {
       file: [null]
     });
   }
+
+  close(){
+    this.dialogRef.close();
+  }
+
 }
