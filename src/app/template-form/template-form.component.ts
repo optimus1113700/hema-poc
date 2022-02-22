@@ -63,6 +63,7 @@ export class TemplateFormComponent implements OnInit {
     };
     this.templateForm.reset();
     this.fileName = '';
+    this.dialogRef.close(obj);
   }
 
   resetForm() {
