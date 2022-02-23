@@ -1,17 +1,18 @@
 <div class="header">
-    <a href="#logo" class="logo"> Morgan Stanley </a>
-    <div class="header-right">
-        <a style="cursor: pointer;" (click)="openTemplateForm()">Add</a>
-        <a href="#customize">Customize</a>
-        <a href="#import">Import</a>
-        <a href="#user" style="float: right;"><span class="material-icons">verified_user</span> </a>
-    </div>
+  <a href="#logo" class="logo"> Morgan Stanley </a>
+  <div class="header-right">
+    <a style="cursor: pointer;" (click)="openTemplateForm()">Add</a>
+    <a href="#customize">Customize</a>
+    <a href="#import">Import</a>
+    <a href="#user" style="float: right;"><span class="material-icons">verified_user</span> </a>
+  </div>
 </div>
 
-<mat-grid-list class="grid-style" cols="4" rowHeight="100px">
-    <mat-grid-tile class="tile-cursor" (dblclick)="doubleClickFunction(tile,i)" *ngFor="let tile of tiles;let i = index"
-      [colspan]="2" [rowspan]="2" [color]="purple">
-      <div style="padding :10px;">{{tile.details}}</div>
+<div class="row">
+  <div *ngFor="let tile of tiles;let i = index" class="column">
+    <div class="card">
       <img style="height: 75px;width: 200px; padding: 10px;" [src]="tile.image" class="image">
-    </mat-grid-tile>
-  </mat-grid-list>
+      <div style="padding :10px;">{{tile.details}}</div>
+    </div>
+  </div>
+</div>
